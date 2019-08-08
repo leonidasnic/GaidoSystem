@@ -12,6 +12,7 @@ namespace GaidoSystem.Controllers
     {
         public IActionResult Index()
         {
+            ViewData["Title"] = "GaidoSystem";
             return View();
         }
 
