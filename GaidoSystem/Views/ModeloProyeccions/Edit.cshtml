@@ -1,0 +1,61 @@
+﻿@model GaidoSystem.Models.ModeloProyeccion
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>ModeloProyeccion</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ModeloProyeccionId" />
+            <div class="form-group">
+                <label asp-for="Fecha" class="control-label"></label>
+                <input asp-for="Fecha" class="form-control" />
+                <span asp-validation-for="Fecha" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ModVentasNetas" class="control-label"></label>
+                <input asp-for="ModVentasNetas" class="form-control" />
+                <span asp-validation-for="ModVentasNetas" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ModCostosVentas" class="control-label"></label>
+                <input asp-for="ModCostosVentas" class="form-control" />
+                <span asp-validation-for="ModCostosVentas" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ModGastosAdmin" class="control-label"></label>
+                <input asp-for="ModGastosAdmin" class="form-control" />
+                <span asp-validation-for="ModGastosAdmin" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ModGastosVentas" class="control-label"></label>
+                <input asp-for="ModGastosVentas" class="form-control" />
+                <span asp-validation-for="ModGastosVentas" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ModGastosOperativos" class="control-label"></label>
+                <input asp-for="ModGastosOperativos" class="form-control" />
+                <span asp-validation-for="ModGastosOperativos" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ModOtrosGastos" class="control-label"></label>
+                <input asp-for="ModOtrosGastos" class="form-control" />
+                <span asp-validation-for="ModOtrosGastos" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

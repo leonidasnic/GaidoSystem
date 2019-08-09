@@ -1,0 +1,66 @@
+﻿@model GaidoSystem.Models.Proyecciones
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Proyecciones</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ProyeccionesId" />
+            <div class="form-group">
+                <label asp-for="Fecha" class="control-label"></label>
+                <input asp-for="Fecha" class="form-control" />
+                <span asp-validation-for="Fecha" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProVentasNetas" class="control-label"></label>
+                <input asp-for="ProVentasNetas" class="form-control" />
+                <span asp-validation-for="ProVentasNetas" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProCostosVentas" class="control-label"></label>
+                <input asp-for="ProCostosVentas" class="form-control" />
+                <span asp-validation-for="ProCostosVentas" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProGastosAdmin" class="control-label"></label>
+                <input asp-for="ProGastosAdmin" class="form-control" />
+                <span asp-validation-for="ProGastosAdmin" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProGastosVentas" class="control-label"></label>
+                <input asp-for="ProGastosVentas" class="form-control" />
+                <span asp-validation-for="ProGastosVentas" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProGastosOperativos" class="control-label"></label>
+                <input asp-for="ProGastosOperativos" class="form-control" />
+                <span asp-validation-for="ProGastosOperativos" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProOtrosGastos" class="control-label"></label>
+                <input asp-for="ProOtrosGastos" class="form-control" />
+                <span asp-validation-for="ProOtrosGastos" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ModeloProyeccionId" class="control-label"></label>
+                <select asp-for="ModeloProyeccionId" class="form-control" asp-items="ViewBag.ModeloProyeccionId"></select>
+                <span asp-validation-for="ModeloProyeccionId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

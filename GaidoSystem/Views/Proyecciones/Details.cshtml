@@ -1,0 +1,66 @@
+﻿@model GaidoSystem.Models.Proyecciones
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Proyecciones</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Fecha)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Fecha)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ProVentasNetas)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ProVentasNetas)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ProCostosVentas)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ProCostosVentas)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ProGastosAdmin)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ProGastosAdmin)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ProGastosVentas)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ProGastosVentas)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ProGastosOperativos)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ProGastosOperativos)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ProOtrosGastos)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ProOtrosGastos)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ModeloProyeccion)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ModeloProyeccion.ModeloProyeccionId)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.ProyeccionesId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

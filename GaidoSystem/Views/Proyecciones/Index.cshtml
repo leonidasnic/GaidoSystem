@@ -1,0 +1,77 @@
+﻿@model IEnumerable<GaidoSystem.Models.Proyecciones>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Fecha)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProVentasNetas)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProCostosVentas)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProGastosAdmin)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProGastosVentas)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProGastosOperativos)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProOtrosGastos)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ModeloProyeccion)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fecha)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProVentasNetas)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProCostosVentas)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProGastosAdmin)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProGastosVentas)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProGastosOperativos)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProOtrosGastos)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ModeloProyeccion.ModeloProyeccionId)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ProyeccionesId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ProyeccionesId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ProyeccionesId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,60 @@
+﻿@model GaidoSystem.Models.ModeloProyeccion
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>ModeloProyeccion</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Fecha)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Fecha)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ModVentasNetas)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ModVentasNetas)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ModCostosVentas)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ModCostosVentas)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ModGastosAdmin)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ModGastosAdmin)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ModGastosVentas)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ModGastosVentas)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ModGastosOperativos)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ModGastosOperativos)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ModOtrosGastos)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ModOtrosGastos)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.ModeloProyeccionId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
