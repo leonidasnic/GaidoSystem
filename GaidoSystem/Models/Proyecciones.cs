@@ -7,44 +7,39 @@ using System.Threading.Tasks;
 
 namespace GaidoSystem.Models
 {
-    public class HistorialER
+    public class Proyecciones
     {
-        public int HistorialERId { get; set; }
+        public int ProyeccionesId { get; set; }
 
         [DataType(DataType.DateTime)]
         public DateTime Fecha { get; set; }
 
         [Display(Name = "Ventas Netas")]
-        [Column(TypeName ="decimal(18,2)")]
-        public decimal VentasNetas { get; set; }
+        [Column(TypeName = "decimal(18,2)")]
+        public decimal ProVentasNetas { get; set; }
 
         [Display(Name = "Costos de Ventas")]
         [Column(TypeName = "decimal(18,2)")]
-        public decimal CostosVentas { get; set; }
+        public decimal ProCostosVentas { get; set; }
 
         [Display(Name = "Gastos Administrativos")]
         [Column(TypeName = "decimal(18,2)")]
-        public decimal GastosAdmin { get; set; }
+        public decimal ProGastosAdmin { get; set; }
 
         [Display(Name = "Gastos de Ventas")]
         [Column(TypeName = "decimal(18,2)")]
-        public decimal GastosVentas { get; set; }
+        public decimal ProGastosVentas { get; set; }
 
         [Display(Name = "Gastos de Operacion")]
         [Column(TypeName = "decimal(18,2)")]
-        public decimal GastosOperativos { get; set; }
+        public decimal ProGastosOperativos { get; set; }
 
         [Display(Name = "Otros Gastos")]
         [Column(TypeName = "decimal(18,2)")]
-        public decimal OtrosGastos { get; set; }
-
-        public int AnualidadERId { get; set; }
-
-        AnualidadER anualidadER { get; set; }
+        public decimal ProOtrosGastos { get; set; }
 
         public int ModeloProyeccionId { get; set; }
 
-        ModeloProyeccion ModeloProyeccion { get; set; }
-
+        public ModeloProyeccion ModeloProyeccion { get; set; }
     }
 }
