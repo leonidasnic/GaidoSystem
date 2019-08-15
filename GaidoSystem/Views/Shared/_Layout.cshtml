@@ -28,7 +28,7 @@
             <div class="container">
                 <a class="navbar-brand bg-warning" style="border-radius:5px" asp-controller="Home" asp-action="Index">
                     <img src="~/imagenes/logo_transparent.png" height="35" width="35" alt="" />
-                    <label style="padding-right:3px">Gaido</label>
+                    <label style="padding-right:10px;">Gaido</label>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -69,9 +69,8 @@
                             <span class="sr-only">Toggle Dropdown</span>
                         </button>
                         <div class="dropdown-menu bg-warning">
-                            <a class="dropdown-item" href="#">Nuevo ER</a>
-                            <a class="dropdown-item" href="#">Editar ER</a>
-                            <a class="dropdown-item" href="#">Historial ER</a>
+                            <a class="dropdown-item" asp-area="" asp-controller="HistorialERs" asp-action="Create">Nuevo</a>
+                            <a class="dropdown-item" asp-area="" asp-controller="HistorialERs" asp-action="Index">Historial</a>
                         </div>
                     </div>
                     <div class="btn-group">
