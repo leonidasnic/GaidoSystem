@@ -16,37 +16,97 @@
               integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"/>
     </environment>
     <link rel="stylesheet" href="~/css/site.css" />
+    <style>
+        .dropdown-item{
+            font-weight:bold
+        }
+    </style>
 </head>
-<body>
+<body style="background-color:#1c4249;">
     <header >
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-dark bg-dark navbar-expand-sm navbar-toggleable-sm  border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">GaidoSystem</a>
+                <a class="navbar-brand bg-warning" style="border-radius:5px" asp-controller="Home" asp-action="Index">
+                    <img src="~/imagenes/logo_transparent.png" height="35" width="35" alt="" />
+                    <label style="padding-right:3px">Gaido</label>
+                </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
+                    <div class="btn-group">
+                        <button style="background-color:#1c4249;" type="button" class="btn btn-lg text-white">
+                            Proyecciones
+                        </button>
+                        <button type="button" class="btn btn-lg btn-warning dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <div class="dropdown-menu bg-warning">
+                            <a class="dropdown-item" href="#">Nuevo ER</a>
+                            <a class="dropdown-item" href="#">Editar ER</a>
+                            <a class="dropdown-item" href="#">Historial ER</a>
+                        </div>
+                    </div>
+                    <div class="btn-group">
+                        <button style="background-color:#1c4249;" type="button" class="btn btn-lg text-white">
+                            Modelos Proyeccion
+                        </button>
+                        <button type="button" class="btn btn-lg btn-warning dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <div class="dropdown-menu bg-warning">
+                            <a class="dropdown-item" href="#">Nuevo ER</a>
+                            <a class="dropdown-item" href="#">Editar ER</a>
+                            <a class="dropdown-item" href="#">Historial ER</a>
+                        </div>
+                    </div>
+                    <div class="btn-group">
+                        <button style="background-color:#1c4249;" type="button" class="btn btn-lg text-white">
+                            Estados Resultados
+                        </button>
+                        <button type="button" class="btn btn-lg btn-warning dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <div class="dropdown-menu bg-warning">
+                            <a class="dropdown-item" href="#">Nuevo ER</a>
+                            <a class="dropdown-item" href="#">Editar ER</a>
+                            <a class="dropdown-item" href="#">Historial ER</a>
+                        </div>
+                    </div>
+                    <div class="btn-group">
+                        <button style="background-color:#1c4249;" type="button" class="btn btn-lg text-white">
+                            Informes
+                        </button>
+                        <button type="button" class="btn btn-lg btn-warning dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <div class="dropdown-menu bg-warning">
+                            <a class="dropdown-item" href="#">Nuevo ER</a>
+                            <a class="dropdown-item" href="#">Editar ER</a>
+                            <a class="dropdown-item" href="#">Historial ER</a>
+                        </div>
+                    </div>
+                    <!--<ul class="navbar-nav flex-grow-1">
+        <li class="nav-item">
+            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Datos ER</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </li>
+    </ul>-->
                 </div>
             </div>
         </nav>
     </header>
     <div class="container">
-        <partial name="_CookieConsentPartial" />
-        <main role="main" class="pb-3">
+        <main role="main" class="pb-3 text-white">
             @RenderBody()
         </main>
+        <partial name="_CookieConsentPartial" />
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer text-muted bg-dark">
         <div class="container">
             &copy; 2019 - GaidoSystem - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
