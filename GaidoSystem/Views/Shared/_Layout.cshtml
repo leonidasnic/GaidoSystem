@@ -20,23 +20,31 @@
         .dropdown-item {
             font-weight: bold
         }
+        .flex-column
+        {
+            margin-top:10px;
+            margin-bottom:10px;
+            w
+        }
     </style>
 </head>
-<body style="background-color:#1c4249;">
+<body class="bg-white">
     <header>
         <nav class="container-fluid">
             <div class="row">
-                <div class="col-md-2 d-none d-md-block bg-light sidebar">
-                    <a class="navbar-brand bg-warning" style="border-radius:5px;margin-bottom:10px; margin-top:10px; margin-left:auto;" asp-controller="Home" asp-action="Index">
-                        <img src="~/imagenes/logo_transparent.png" height="35" width="35" alt="" />
-                        <label style="padding-right:10px;">Gaido</label>
+                <div class="col-md-2 d-none d-md-block bg-dark sidebar">
+                    <a class="navbar-brand" style="background-color:#1c4249;border-radius:5px;margin-bottom:10px; margin-top:10px; margin-left:auto;" asp-controller="Home" asp-action="Index">
+                        <video class="embed-responsive-item" controls autoplay loop muted style="height:50%;width:70%; margin-left:auto;margin-right:auto;border-radius:5px">
+                            <source src="~/Vids/output_free.mp4" type="video/mp4" />
+                        </video>
+                        <label style="padding-right:10px;color:white">Gaido</label>
                     </a>
+
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                            aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
+                            aria-expanded="false" aria-label="Toggle navigation"></button>
                     <div class="sidebar-sticky">
                         <div class="nav flex-column">
+                            <!--desde style hasta flase-->
                             <button style="background-color:#1c4249;" class="btn btn-secondary btn-lg dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Proyecciones
                             </button>
@@ -47,51 +55,50 @@
                             </div>
                         </div>
                         <div class="nav flex-column">
-                            <button style="background-color:#1c4249;" type="button" class="btn btn-lg text-white">
-                                Modelos Proyeccion
+                            <!---->
+                            <button style="background-color:#1c4249;" class="btn btn-secondary btn-lg dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Modelos
                             </button>
-                            <button type="button" class="btn btn-lg btn-warning dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="sr-only">Toggle Dropdown</span>
-                            </button>
-                            <div class="dropdown-menu bg-warning">
+
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" href="#">Nuevo ER</a>
                                 <a class="dropdown-item" href="#">Editar ER</a>
                                 <a class="dropdown-item" href="#">Historial ER</a>
                             </div>
                         </div>
                         <div class="nav flex-column">
-                            <button style="background-color:#1c4249;" type="button" class="btn btn-lg text-white">
-                                Estados Resultados
+                            <!---->
+                            <button style="background-color:#1c4249;" class="btn btn-secondary btn-lg dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                ER
                             </button>
-                            <button type="button" class="btn btn-lg btn-warning dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="sr-only">Toggle Dropdown</span>
-                            </button>
-                            <div class="dropdown-menu bg-warning">
+
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" asp-area="" asp-controller="HistorialERs" asp-action="Create">Nuevo</a>
                                 <a class="dropdown-item" asp-area="" asp-controller="HistorialERs" asp-action="Index">Historial</a>
                             </div>
                         </div>
                         <div class="nav flex-column">
-                            <button style="background-color:#1c4249;" type="button" class="btn btn-lg text-white">
+                            <!---->
+                            <button style="background-color:#1c4249;" class="btn btn-secondary btn-lg dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Informes
                             </button>
-                            <button type="button" class="btn btn-lg btn-warning dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="sr-only">Toggle Dropdown</span>
-                            </button>
-                            <div class="dropdown-menu bg-warning">
+
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" href="#">Nuevo ER</a>
                                 <a class="dropdown-item" href="#">Editar ER</a>
                                 <a class="dropdown-item" href="#">Historial ER</a>
                             </div>
                         </div>
                     </div>
+                    
                 </div>
                 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
 
                     @RenderBody()
 
+                    <partial name="_CookieConsentPartial" />
+
                 </main>
-                <partial name="_CookieConsentPartial" />
             </div>
         </nav>
     </header>

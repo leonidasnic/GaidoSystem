@@ -3,12 +3,13 @@
 @{
     ViewData["Title"] = "Create";
 }
-
-<h1>Create</h1>
-
-<h4>HistorialER</h4>
-<hr />
-<div class="row">
+    <style>
+        .form-group,h2{
+            color:black;
+        }
+    </style>
+    <h2>Ingresar</h2>
+<div class="container">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -17,6 +18,7 @@
                 <input asp-for="Fecha" class="form-control" />
                 <span asp-validation-for="Fecha" class="text-danger"></span>
             </div>
+           
             <div class="form-group">
                 <label asp-for="VentasNetas" class="control-label"></label>
                 <input asp-for="VentasNetas" class="form-control" />
