@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GaidoSystem.Models;
 
-namespace GaidoSystem.Controllers
+namespace GaidoSystem.Controllers 
 {
     public class HistorialERsController : Controller
     {
