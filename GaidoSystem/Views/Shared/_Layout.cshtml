@@ -20,16 +20,26 @@
         
     </script>
     <style>
-       
-        .dropdown-item {
-            font-weight: bold
+        .dropdown-toggle{
         }
         .flex-column
         {
             margin-top:10px;
             margin-bottom:10px;
-            w
+            margin-left:0;
+            margin-right:10px;
+            padding-top:5%;
+            padding-bottom:5%;
         }
+        .dropdown-menu
+        {
+           background-color:#1c4249;
+           text-align:center;
+        }
+        .dropdown-item{
+            color:white;
+        }
+        
     </style>
 </head>
 <body class="bg-white">
@@ -49,8 +59,8 @@
                     <div class="sidebar-sticky">
                         <div class="nav flex-column">
                             <!--desde style hasta flase-->
-                            <button style="background-color:#1c4249;" class="btn btn-secondary btn-lg dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Proyecciones
+                            <button style="background-color:#1c4249;" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Proyecion
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" asp-area="" asp-controller="Proyecciones" asp-action="Create">Nuevo</a>
@@ -60,7 +70,7 @@
                         </div>
                         <div class="nav flex-column">
                             <!---->
-                            <button style="background-color:#1c4249;" class="btn btn-secondary btn-lg dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <button style="background-color:#1c4249;" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Modelos
                             </button>
 
@@ -72,7 +82,7 @@
                         </div>
                         <div class="nav flex-column">
                             <!---->
-                            <button style="background-color:#1c4249;" class="btn btn-secondary btn-lg dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <button style="background-color:#1c4249;" class="btn btn-secondary btn-lg" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 ER
                             </button>
 
@@ -83,7 +93,7 @@
                         </div>
                         <div class="nav flex-column">
                             <!---->
-                            <button style="background-color:#1c4249;" class="btn btn-secondary btn-lg dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <button style="background-color:#1c4249;" class="btn btn-secondary btn-lg" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Informes
                             </button>
 
