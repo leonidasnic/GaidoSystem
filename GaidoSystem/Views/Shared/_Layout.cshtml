@@ -16,7 +16,11 @@
               integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" />
     </environment>
     <link rel="stylesheet" href="~/css/site.css" />
+    <script>
+        
+    </script>
     <style>
+       
         .dropdown-item {
             font-weight: bold
         }
@@ -49,8 +53,8 @@
                                 Proyecciones
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#">Nuevo ER</a>
-                                <a class="dropdown-item" href="#">Editar ER</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Proyecciones" asp-action="Create">Nuevo</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Proyecciones" asp-action="index">Poyecciones</a>
                                 <a class="dropdown-item" href="#">Historial ER</a>
                             </div>
                         </div>
