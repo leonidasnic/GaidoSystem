@@ -38,6 +38,10 @@ namespace GaidoSystem.Models
         [Column(TypeName = "decimal(18,2)")]
         public decimal OtrosGastos { get; set; }
 
+        [Display(Name = "Utilidad")]
+        [Column(TypeName = "decimal(18,2)")]
+        public decimal Utilidad { get; set; }
+
         public int AnualidadERId { get; set; }
 
         AnualidadER anualidadER { get; set; }
