@@ -30,7 +30,7 @@ namespace GaidoSystem.Models
         [Column(TypeName = "decimal(18,2)")]
         public decimal GastosVentas { get; set; }
 
-        [Display(Name = "Gastos de Operacion")]
+        [Display(Name = "Gastos de Operación")]
         [Column(TypeName = "decimal(18,2)")]
         public decimal GastosOperativos { get; set; }
 
