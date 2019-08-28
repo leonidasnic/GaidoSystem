@@ -10,7 +10,6 @@ namespace GaidoSystem.Controllers
 {
     public class HomeController : Controller
     {
-        List<HistorialER> historialERs;
         public IActionResult Index()
         {
             ViewData["Title"] = "GaidoSystem";

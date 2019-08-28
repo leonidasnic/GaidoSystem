@@ -43,9 +43,9 @@ namespace GaidoSystem.Controllers
         }
 
         // GET: ModeloProyeccions/Create
-        public IActionResult Create()
+        public async    Task <IActionResult> Create()
         {
-            return View();
+            return View(await _context.ModeloProyeccion.Include(a=>a.HistotialesER).ToListAsync());
         }
 
         // POST: ModeloProyeccions/Create

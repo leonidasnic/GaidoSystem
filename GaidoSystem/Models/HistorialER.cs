@@ -42,6 +42,14 @@ namespace GaidoSystem.Models
         [Column(TypeName = "decimal(18,2)")]
         public decimal Utilidad { get; set; }
 
+        [Display(Name = "IR")]
+        [Column(TypeName = "decimal(18,2)")]
+        public decimal IR { get; set; }
+
+        [Display(Name = "Utilidad Neta")]
+        [Column(TypeName = "decimal(18,2)")]
+        public decimal UtilidadNeta { get; set; }
+
         public int AnualidadERId { get; set; }
 
         AnualidadER anualidadER { get; set; }
