@@ -58,13 +58,13 @@ namespace GaidoSystem.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("HistorialERId,Fecha,VentasNetas,CostosVentas,GastosAdmin,GastosVentas,GastosOperativos,OtrosGastos")] HistorialER historialER)
+        public async Task<IActionResult> Create([Bind("HistorialERId,Fecha,VentasNetas,CostosVentas,GastosAdmin,GastosVentas,GastosOperativos,OtrosGastos,Utilidad,IR,UtilidadNeta")] HistorialER historialER)
         {
             if (ModelState.IsValid)
             {
                 ModeloProyeccion modproyeccion;
                 //TODO:Primero Ingresar un ModeloPRoyeccion de 0.0%
-                if (_context.ModeloProyeccion.Count()>= 0) {
+                if (_context.ModeloProyeccion.Count()== 0) {
                     modproyeccion = new ModeloProyeccion {
                         Fecha = DateTime.Today,
                         ModVentasNetas = Convert.ToDecimal(0.00),
@@ -88,29 +88,30 @@ namespace GaidoSystem.Controllers
                 { 
                     var modelo= _context.ModeloProyeccion.Include(a=>a.HistotialesER).FirstOrDefault(a=>a.ModeloProyeccionId==1);
                     var firstEr= modelo.HistotialesER.FirstOrDefault(a=>a.HistorialERId==1);
-                    modelo.ModVentasNetas = firstEr.VentasNetas;
-                    modelo.ModCostosVentas = firstEr.CostosVentas;
-                    modelo.ModGastosAdmin = firstEr.GastosAdmin;
-                    modelo.ModGastosVentas = firstEr.GastosVentas;
-                    modelo.ModGastosOperativos = firstEr.GastosOperativos;
-                    modelo.ModOtrosGastos = firstEr.OtrosGastos;
-                    modelo.ModUtilidad = firstEr.Utilidad;
-                    modelo.ModIR = firstEr.IR;
-                    modelo.ModUtilidadNeta = firstEr.UtilidadNeta;
-                   List<HistorialER> lister = modelo.HistotialesER.Where(a => a.HistorialERId != 1).ToList();
+                    //modelo.ModVentasNetas = firstEr.VentasNetas;
+                    //modelo.ModCostosVentas = firstEr.CostosVentas;
+                    //modelo.ModGastosAdmin = firstEr.GastosAdmin;
+                    //modelo.ModGastosVentas = firstEr.GastosVentas;
+                    //modelo.ModGastosOperativos = firstEr.GastosOperativos;
+                    //modelo.ModOtrosGastos = firstEr.OtrosGastos;
+                    //modelo.ModUtilidad = firstEr.Utilidad;
+                    //modelo.ModIR = firstEr.IR;
+                    //modelo.ModUtilidadNeta = firstEr.UtilidadNeta;
+                    modelo.HistotialesER.Add(historialER);
+                    List<HistorialER> lister = modelo.HistotialesER.Where(a => a.HistorialERId != 1).ToList();
                     foreach (var item in lister)
                     {
-                        modelo.ModVentasNetas = item.VentasNetas/ modelo.ModVentasNetas;
-                        modelo.ModCostosVentas = item.CostosVentas/modelo.ModCostosVentas;
-                        modelo.ModGastosAdmin = item.GastosAdmin/modelo.ModGastosAdmin;
-                        modelo.ModGastosVentas = item.GastosVentas/modelo.ModGastosVentas;
-                        modelo.ModGastosOperativos = item.GastosOperativos / modelo.ModGastosOperativos;
-                        modelo.ModOtrosGastos = item.OtrosGastos/modelo.ModOtrosGastos;
-                        modelo.ModIR = item.IR / modelo.ModIR;
-                        modelo.ModUtilidadNeta = item.IR / modelo.ModIR;
+                        modelo.ModVentasNetas = Convert.ToDecimal(Math.Round((item.VentasNetas/ firstEr.VentasNetas),2));
+                        modelo.ModCostosVentas = Convert.ToDecimal(Math.Round((item.CostosVentas / firstEr.CostosVentas), 2));
+                        modelo.ModGastosAdmin = Convert.ToDecimal(Math.Round((item.GastosAdmin / firstEr.GastosAdmin), 2));
+                        modelo.ModGastosVentas = Convert.ToDecimal(Math.Round((item.GastosVentas / firstEr.GastosVentas), 2));
+                        modelo.ModGastosOperativos = Convert.ToDecimal(Math.Round((item.GastosOperativos / firstEr.GastosOperativos), 2));
+                        modelo.ModOtrosGastos = Convert.ToDecimal(Math.Round((item.OtrosGastos / firstEr.OtrosGastos), 2));
+                        modelo.ModUtilidad= Convert.ToDecimal(Math.Round((item.Utilidad / firstEr.Utilidad), 2));
+                        modelo.ModIR = Convert.ToDecimal(Math.Round((item.IR / firstEr.IR), 2));
+                        modelo.ModUtilidadNeta = Convert.ToDecimal(Math.Round((item.UtilidadNeta / firstEr.UtilidadNeta), 2));
                     }
                 _context.Update(modelo);
-                modelo.HistotialesER.Add(historialER);
                 await _context.SaveChangesAsync();
                 }
                 return RedirectToAction(nameof(Index));

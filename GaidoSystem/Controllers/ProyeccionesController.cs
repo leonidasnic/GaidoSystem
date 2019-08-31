@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GaidoSystem.Models;
+using System.Dynamic;
 
 namespace GaidoSystem.Controllers
 {
@@ -47,23 +48,57 @@ namespace GaidoSystem.Controllers
         // GET: Proyecciones/Create
         public IActionResult Create()
         {
-
+        //    @*Ventas netas
+        //Costos de ventas
+        //Gastos Administrativos
+        //Gastos de venta
+        //Gastos de Operacion
+        //Otros Gastos
+        //Utilidad
+        //IR
+        //Utilidad Neta*@
             ModeloProyeccion modpro;
 
-           List<HistorialER> hr = _context.HistorialER.ToList();
+            HistorialER hr = new HistorialER();
+            hr.Fecha = _context.HistorialER.LastOrDefault(a=>a.ModeloProyeccionId==1).Fecha;
+            hr.VentasNetas = _context.HistorialER.LastOrDefault(a => a.ModeloProyeccionId == 1).VentasNetas;
+            hr.CostosVentas = _context.HistorialER.LastOrDefault(a => a.ModeloProyeccionId == 1).CostosVentas;
+            hr.GastosAdmin = _context.HistorialER.LastOrDefault(a => a.ModeloProyeccionId == 1).GastosAdmin;
+            hr.GastosVentas = _context.HistorialER.LastOrDefault(a => a.ModeloProyeccionId == 1).GastosVentas;
+            hr.GastosOperativos = _context.HistorialER.LastOrDefault(a => a.ModeloProyeccionId == 1).GastosOperativos;
+            hr.OtrosGastos = _context.HistorialER.LastOrDefault(a => a.ModeloProyeccionId == 1).OtrosGastos;
+            hr.Utilidad = _context.HistorialER.LastOrDefault(a => a.ModeloProyeccionId == 1).Utilidad;
+            hr.IR = _context.HistorialER.LastOrDefault(a => a.ModeloProyeccionId == 1).IR;
+            hr.UtilidadNeta = _context.HistorialER.LastOrDefault(a => a.ModeloProyeccionId == 1).UtilidadNeta;
+
             if (_context.ModeloProyeccion.Count()<=1)
             {
                 modpro = new ModeloProyeccion { ModVentasNetas=0.00m, ModCostosVentas = 0.00m, ModGastosAdmin = 0.00m,
                     ModGastosOperativos = 0.00m, ModGastosVentas = 0.00m, ModOtrosGastos = 0.00m,
-                    ModUtilidad = 0.00m,ModIR=0.00m,ModUtilidadNeta=0.00m,HistotialesER =hr};
+                    ModUtilidad = 0.00m,ModIR=0.00m,ModUtilidadNeta=0.00m,HistotialesER = new List<HistorialER> { hr}
+                };
                 _context.ModeloProyeccion.Add(modpro);
                 _context.SaveChanges();
                 modpro = _context.ModeloProyeccion.Include(m => m.HistotialesER).LastOrDefault();
             }
             else
             {
-                modpro = _context.ModeloProyeccion.Include(m=>m.HistotialesER).LastOrDefault();
+                var er = _context.HistorialER.FirstOrDefault(A => A.ModeloProyeccionId == 2);
+                er.Fecha = hr.Fecha;
+                er.VentasNetas = hr.VentasNetas;
+                er.CostosVentas = hr.CostosVentas;
+                er.GastosAdmin = hr.GastosAdmin;
+                er.GastosVentas = hr.GastosVentas;
+                er.GastosOperativos = hr.GastosOperativos;
+                er.OtrosGastos = hr.OtrosGastos;
+                er.Utilidad = hr.Utilidad;
+                er.IR = hr.IR;
+                er.UtilidadNeta = hr.UtilidadNeta;
+                _context.HistorialER.Update(er);
+                modpro = _context.ModeloProyeccion.Include(m=>m.HistotialesER).FirstOrDefault(a=>a.ModeloProyeccionId==2);
+                
             }
+           
             return View(modpro);
         }
 
@@ -72,16 +107,15 @@ namespace GaidoSystem.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProyeccionesId,Fecha,ProVentasNetas,ProCostosVentas,ProGastosAdmin,ProGastosVentas,ProGastosOperativos,ProOtrosGastos,ModeloProyeccionId")] Proyecciones proyecciones)
+        public async Task<IActionResult> Create(ModeloProyeccion ModPRo)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(proyecciones);
+                _context.ModeloProyeccion.Update(ModPRo);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ModeloProyeccionId"] = new SelectList(_context.ModeloProyeccion, "ModeloProyeccionId", "ModeloProyeccionId", proyecciones.ModeloProyeccionId);
-            return View(proyecciones);
+            return View();
         }
 
         // GET: Proyecciones/Edit/5

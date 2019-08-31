@@ -103,7 +103,7 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.HistotialesER) {
+@foreach (HistorialER item in Model.HistotialesER) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Fecha.Year)
@@ -127,7 +127,7 @@
                 @Html.DisplayFor(modelItem => item.OtrosGastos)
             </td>
             <td>
-                @Html.DisplayFor(modelitem=>item.UtilidadNeta)
+                @Html.DisplayFor(modelitem=>item.Utilidad)
             </td>
            <td>
                 <a asp-action="Edit" asp-route-id="@item.HistorialERId">Edit</a> |
