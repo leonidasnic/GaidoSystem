@@ -37,7 +37,19 @@ namespace GaidoSystem.Models
         [Display(Name = "Otros Gastos")]
         [Column(TypeName = "decimal(4,2)")]
         public decimal ModOtrosGastos { get; set; }
-       public List <HistorialER> HistotialesER { get; set; }
+
+        [Display(Name = "Utilidad")]
+        [Column(TypeName = "decimal(4,2)")]
+        public decimal ModUtilidad { get; set; }
+
+        [Display(Name = "Utilidad")]
+        [Column(TypeName = "decimal(4,2)")]
+        public decimal ModIR { get; set; }
+
+        [Display(Name = "Utilidad")]
+        [Column(TypeName = "decimal(4,2)")]
+        public decimal ModUtilidadNeta { get; set; }
+        public List <HistorialER> HistotialesER { get; set; }
        public List <Proyecciones> ListaProyecciones { get; set; }
     }
 }

@@ -47,8 +47,24 @@ namespace GaidoSystem.Controllers
         // GET: Proyecciones/Create
         public IActionResult Create()
         {
-            ViewData["ModeloProyeccionId"] = new SelectList(_context.ModeloProyeccion, "ModeloProyeccionId", "ModeloProyeccionId");
-            return View();
+
+            ModeloProyeccion modpro;
+
+           List<HistorialER> hr = _context.HistorialER.ToList();
+            if (_context.ModeloProyeccion.Count()<=1)
+            {
+                modpro = new ModeloProyeccion { ModVentasNetas=0.00m, ModCostosVentas = 0.00m, ModGastosAdmin = 0.00m,
+                    ModGastosOperativos = 0.00m, ModGastosVentas = 0.00m, ModOtrosGastos = 0.00m,
+                    ModUtilidad = 0.00m,ModIR=0.00m,ModUtilidadNeta=0.00m,HistotialesER =hr};
+                _context.ModeloProyeccion.Add(modpro);
+                _context.SaveChanges();
+                modpro = _context.ModeloProyeccion.Include(m => m.HistotialesER).LastOrDefault();
+            }
+            else
+            {
+                modpro = _context.ModeloProyeccion.Include(m=>m.HistotialesER).LastOrDefault();
+            }
+            return View(modpro);
         }
 
         // POST: Proyecciones/Create

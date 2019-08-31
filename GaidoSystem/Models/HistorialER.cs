@@ -50,10 +50,6 @@ namespace GaidoSystem.Models
         [Column(TypeName = "decimal(18,2)")]
         public decimal UtilidadNeta { get; set; }
 
-        public int AnualidadERId { get; set; }
-
-        AnualidadER anualidadER { get; set; }
-
         public int ModeloProyeccionId { get; set; }
 
         ModeloProyeccion ModeloProyeccion { get; set; }

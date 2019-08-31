@@ -16,6 +16,5 @@ namespace GaidoSystem.Models
         [StringLength(50,ErrorMessage ="No puede ingresar mas de 50 carateres")]
         public int Notas { get; set; }
 
-        public List <HistorialER>  HistorialERs { get; set; }
     }
 }

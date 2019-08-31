@@ -60,7 +60,7 @@
                         <div class="nav flex-column">
                             <!--desde style hasta flase-->
                             <button style="background-color:#1c4249;" class="btn btn-secondary btn-lg" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              Proyección
+                                Proyección
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" asp-area="" asp-controller="Proyecciones" asp-action="Create">Nuevo</a>
@@ -104,15 +104,58 @@
                             </div>
                         </div>
                     </div>
-                    
                 </div>
-                <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+           
+                <div class="nav d-lg-none d-md-none row bg-light" style="margin-left:30px;">
+                    <div class=""><a class="btn btn-info btn-lg" asp-area="" asp-controller="Home" asp-action="Index">Home</a></div>
+                    <div class="dropdown">
+                        <button style="background-color:#1c4249;" class="btn btn-secondary btn-lg" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            ER
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" asp-area="" asp-controller="HistorialERs" asp-action="Create">Nuevo</a>
+                            <a class="dropdown-item" asp-area="" asp-controller="HistorialERs" asp-action="Index">Historial</a>
+                        </div>
+                    </div>
+                    <div class="dropdown">
+                        <button style="background-color:#1c4249;" class="btn btn-secondary btn-lg" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Modelos
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" asp-area="" asp-controller="ModeloProyeccions" asp-action="Create">Nuevo</a>
+                            <a class="dropdown-item" asp-area="" asp-controller="ModeloProyeccions" asp-action="Index">Editar</a>
+                            <a class="dropdown-item" asp-area="" asp-controller="Proyecciones" asp-action="Index">Proyectar</a>
+                        </div>
+                    </div>
+                    <div class="dropdown">
+                        <button style="background-color:#1c4249;" class="btn btn-secondary btn-lg" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Proyección
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" asp-area="" asp-controller="Proyecciones" asp-action="Create">Nuevo</a>
+                            <a class="dropdown-item" asp-area="" asp-controller="Proyecciones" asp-action="index">Poyecciones</a>
+                            <a class="dropdown-item" href="#">Historial ER</a>
+                        </div>
+                    </div>
+                    <div class="dropdown">
+                        <button style="background-color:#1c4249;" class="btn btn-secondary btn-lg" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Informes
+                        </button>
+
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="#">Nuevo ER</a>
+                            <a class="dropdown-item" href="#">Editar ER</a>
+                            <a class="dropdown-item" href="#">Historial ER</a>
+                        </div>
+                    </div>
+                </div>
+                <div role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
 
                     @RenderBody()
 
                     <partial name="_CookieConsentPartial" />
 
-                </main>
+                </div>
             </div>
         </nav>
     </header>

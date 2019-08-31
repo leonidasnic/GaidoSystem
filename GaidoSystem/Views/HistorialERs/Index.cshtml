@@ -1,10 +1,74 @@
-﻿@model IEnumerable<GaidoSystem.Models.HistorialER>
+﻿@model GaidoSystem.Models.ModeloProyeccion
 
 @{
     ViewData["Title"] = "Index";
 }
-
-
+<script>
+    function check() {
+        if (document.getElementById("ERcount").innerHTML <= 1) {
+            document.getElementById("alerta").classList.add('bg-danger');
+            document.getElementById("alerta").classList.add('text-white');
+            document.getElementById("alerta").innerHTML = "Necesita al menos 2 ERs Para Proyectar"
+            document.getElementById("btnAlerta").className="d-block";
+        }
+    }
+</script>
+    <div class="row">
+        <div class="col">
+            <div class="card" style="width: 18rem;">
+                <div class="card-header  bg-warning">
+                    <h5 class="card-title">Modelo Auto Generado</h5>
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <tr>
+                            <th>concepto</th>
+                            <th>Porcentaje Crecimiento</th>
+                            <th></th>
+                        </tr>
+                        <tr>
+                            <td>@Html.DisplayNameFor(Model => Model.ModVentasNetas)</td>
+                            <td>@Html.DisplayFor(Model => Model.ModVentasNetas)</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><button type="button" class="btn btn-primary"> Cantidad ERs <span id="ERcount" class="badge badge-light">@Model.HistotialesER.Count()</span></button></td>
+                        </tr>
+                        <tr>
+                            <td  id="alerta" ></td>
+                            <td id="btnAlerta" class="d-none"> <a asp-action="Create"  class="btn btn-lg btn-primary">Agregar +</a></td>
+                        </tr>
+                    </table>
+                    <a href="#" class="btn btn-warning" onclick="check()">Proyectar</a>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card" style="width: 18rem;">
+                <div class="card-header  bg-warning">
+                    <h5 class="card-title">Modelo Manual</h5>
+                </div>
+                <div class="card-body">
+                    <table class="table table-danger">
+                        <tr>
+                            <th>concepto</th>
+                            <th>Porcentaje Crecimiento</th>
+                            <th></th>
+                        </tr>
+                        <tr>
+                            <td>@Html.DisplayNameFor(Model => Model.ModVentasNetas)</td>
+                            <td class="form-control"  sty contenteditable="true">00</td>
+                        </tr>
+                        <tr>
+                            <td>......</td>
+                            <td></td>
+                        </tr>
+                    </table>
+                    <a class="btn btn-warning" asp-action="toProyectar">Proyectar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+<br />
 <p>
     <a asp-action="Create" class="btn btn-lg btn-primary" >+</a>
 </p>
@@ -12,37 +76,37 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Fecha)
+                fecha
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.VentasNetas)
+               VentasNetas
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CostosVentas)
+                costo de ventas
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.GastosAdmin)
+                gastos admion
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.GastosVentas)
+                gastos de ventas
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.GastosOperativos)
+                gastos operativos
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.OtrosGastos)
+                otros gastos
             </th>
             <th class="bg-primary">
                 Utilidad
             </th>
-            @*<th></th>*@
+            <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (var item in Model.HistotialesER) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Fecha.Month)
+                @Html.DisplayFor(modelItem => item.Fecha.Year)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.VentasNetas)
@@ -63,13 +127,13 @@
                 @Html.DisplayFor(modelItem => item.OtrosGastos)
             </td>
             <td>
-
+                @Html.DisplayFor(modelitem=>item.UtilidadNeta)
             </td>
-            @*<td>
+           <td>
                 <a asp-action="Edit" asp-route-id="@item.HistorialERId">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.HistorialERId">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.HistorialERId">Delete</a>
-            </td>*@
+            </td>
         </tr>
 }
     </tbody>

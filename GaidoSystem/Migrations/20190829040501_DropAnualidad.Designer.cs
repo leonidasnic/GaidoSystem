@@ -4,14 +4,16 @@ using GaidoSystem.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GaidoSystem.Migrations
 {
     [DbContext(typeof(GaidoSystemContext))]
-    partial class GaidoSystemContextModelSnapshot : ModelSnapshot
+    [Migration("20190829040501_DropAnualidad")]
+    partial class DropAnualidad
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -99,16 +101,7 @@ namespace GaidoSystem.Migrations
                     b.Property<decimal>("ModGastosVentas")
                         .HasColumnType("decimal(4,2)");
 
-                    b.Property<decimal>("ModIR")
-                        .HasColumnType("decimal(4,2)");
-
                     b.Property<decimal>("ModOtrosGastos")
-                        .HasColumnType("decimal(4,2)");
-
-                    b.Property<decimal>("ModUtilidad")
-                        .HasColumnType("decimal(4,2)");
-
-                    b.Property<decimal>("ModUtilidadNeta")
                         .HasColumnType("decimal(4,2)");
 
                     b.Property<decimal>("ModVentasNetas")
@@ -145,15 +138,6 @@ namespace GaidoSystem.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("ProVentasNetas")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("proIR")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("proUtilidad")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("proUtilidadNeta")
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("ProyeccionesId");

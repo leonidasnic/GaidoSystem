@@ -1,22 +1,116 @@
-﻿@model GaidoSystem.Models.Proyecciones
+﻿@model GaidoSystem.Models.ModeloProyeccion
 
 @{
     ViewData["Title"] = "Create";
 }
+@{
+    var ER = Model.HistotialesER.LastOrDefault();
+    int Tipo;
 
+    Tipo = Model.ModeloProyeccionId;
+    
+}
 <h1></h1>
+@*Ventas netas
+Costos de ventas
+Gastos Administrativos
+Gastos de venta
+Gastos de Operacion
+Otros Gastos
+Utilidad
+IR
+Utilidad Neta*@
 
-<h4>Proyecciones</h4>
-<hr />
+
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
+    <div class="col-3">
+        <table class="table table-dark table-striped">
+            <tr>
+                <th scope="col" colspan="2" class="bg-warning"> 
+                    Proyectar
+                </th>
+                <td rowspan="20"  class="bg-light mh-100"><button class="btn btn-warning" style="padding-top:1500%;padding-bottom:1500%;">&gt;</button></td>
+            </tr>
+            <tr>
+                <td>@ER.Fecha.Year</td>
+                <td class="bg-danger"><input type="number" max="3" placeholder="Años" class=" form-control" /></td>
+            </tr>
+            <tr>
+                <td colspan="2" class="text-center">Ventas Netas @Tipo </td>
+            </tr>
+            <tr>
+                <td>@ER.VentasNetas</td>
+                <td class="bg-danger" contenteditable="true">@Html.DisplayFor(a => a.ModVentasNetas)<label> %</label></td>
+
+            </tr>
+            <tr>
+                <td colspan="2" class="text-center">Costo de Ventas</td>
+            </tr>
+            <tr>
+                <td>@ER.CostosVentas</td>
+                <td class="bg-danger" contenteditable="true">@Html.DisplayFor(a => a.ModCostosVentas)<label> %</label></td>
+            </tr>
+            <tr>
+                <td colspan="2" class="text-center">Gastos Administrativos</td>
+            </tr>
+            <tr>
+                <td>@ER.GastosAdmin</td>
+                <td class="bg-danger" contenteditable="true">@Html.DisplayFor(a => a.ModGastosAdmin)<label> %</label></td>
+            </tr>
+            <tr>
+                <td colspan="2" class="text-center">Gastos Ventas</td>
+            </tr>
+            <tr>
+                <td>@ER.GastosVentas</td>
+                <td class="bg-danger" contenteditable="true">@Html.DisplayFor(a => a.ModGastosVentas)<label> %</label></td>
+            </tr>
+            <tr>
+                <td colspan="2">Gastos Operacion</td>
+            </tr>
+            <tr>
+                <td>@ER.GastosOperativos</td>
+                <td class="bg-danger" contenteditable="true">@Html.DisplayFor(a => a.ModGastosOperativos)<label> %</label></td>
+            </tr>
+            <tr>
+                <td colspan="2" class="text-center">Otros Gastos</td>
+            </tr>
+            <tr>
+                <td>@ER.OtrosGastos</td>
+                <td class="bg-danger" contenteditable="true">@Html.DisplayFor(a => a.ModOtrosGastos)<label> %</label></td>
+            </tr>
+            <tr>
+                <td colspan="2" class="text-center">Utilidad</td>
+            </tr>
+            <tr>
+                <td>@ER.Utilidad</td>
+                <td class="bg-danger" contenteditable="true">@Html.DisplayFor(a => a.ModUtilidad)<label> %</label></td>
+            </tr>
+            <tr>
+                <td colspan="2" class="text-center">IR</td>
+            </tr>
+            <tr>
+                <td>@ER.IR</td>
+                <td class="bg-danger" contenteditable="true">@Html.DisplayFor(a => a.ModIR)<label> %</label></td>
+            </tr>
+            <tr>
+                <td colspan="2" class="text-center">Utilidad Neta</td>
+            </tr>
+            <tr>
+                <td>@ER.UtilidadNeta</td>
+                <td class="bg-danger" contenteditable="true">@Html.DisplayFor(a => a.ModUtilidadNeta)<label> %</label></td>
+            </tr>
+
+        </table>
+    </div>
+    <div class="col-2">
+        
+        <!-- <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
+            @*<div class="form-group">
                 <label asp-for="Fecha" class="control-label"></label>
                 <input asp-for="Fecha" class="form-control" />
                 <span asp-validation-for="Fecha" class="text-danger"></span>
-            </div>
+            </div>*@
             <div class="form-group">
                 <label asp-for="ProVentasNetas" class="control-label"></label>
                 <input asp-for="ProVentasNetas" class="form-control" />
@@ -49,13 +143,15 @@
             </div>
             <div class="form-group">
                 <label asp-for="ModeloProyeccionId" class="control-label"></label>
-                <select asp-for="ModeloProyeccionId" class ="form-control" asp-items="ViewBag.ModeloProyeccionId"></select>
+                <select asp-for="ModeloProyeccionId" class="form-control" asp-items="ViewBag.ModeloProyeccionId"></select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Crear" class="btn btn-primary" />
             </div>
-        </form>
+        </form>-->
     </div>
+
+
 </div>
 
 <div>

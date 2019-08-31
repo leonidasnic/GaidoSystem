@@ -38,6 +38,18 @@ namespace GaidoSystem.Models
         [Column(TypeName = "decimal(18,2)")]
         public decimal ProOtrosGastos { get; set; }
 
+        [Display(Name = "Utilidad")]
+        [Column(TypeName = "decimal(18,2)")]
+        public decimal proUtilidad { get; set; }
+
+        [Display(Name = "IR")]
+        [Column(TypeName = "decimal(18,2)")]
+        public decimal proIR { get; set; }
+
+        [Display(Name = "Utilidad Neta")]
+        [Column(TypeName = "decimal(18,2)")]
+        public decimal proUtilidadNeta { get; set; }
+
         public int ModeloProyeccionId { get; set; }
 
         [Display(Name= "Modelo Proyección")]

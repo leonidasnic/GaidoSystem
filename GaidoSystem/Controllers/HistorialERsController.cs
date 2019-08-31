@@ -13,6 +13,7 @@ namespace GaidoSystem.Controllers
     {
         private readonly GaidoSystemContext _context;
 
+        
         public HistorialERsController(GaidoSystemContext context)
         {
             _context = context;
@@ -21,7 +22,10 @@ namespace GaidoSystem.Controllers
         // GET: HistorialERs
         public async Task<IActionResult> Index()
         {
-            return View(await _context.HistorialER.ToListAsync());
+            var modelopro = await _context.ModeloProyeccion.Include(a=>a.HistotialesER).FirstAsync(a=>a.ModeloProyeccionId==1);
+            
+            //TODO:modelo proreccion
+            return View(modelopro);
         }
 
         // GET: HistorialERs/Details/5
@@ -45,6 +49,7 @@ namespace GaidoSystem.Controllers
         // GET: HistorialERs/Create
         public IActionResult Create()
         {
+
             return View();
         }
 
@@ -57,8 +62,57 @@ namespace GaidoSystem.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(historialER);
+                ModeloProyeccion modproyeccion;
+                //TODO:Primero Ingresar un ModeloPRoyeccion de 0.0%
+                if (_context.ModeloProyeccion.Count()>= 0) {
+                    modproyeccion = new ModeloProyeccion {
+                        Fecha = DateTime.Today,
+                        ModVentasNetas = Convert.ToDecimal(0.00),
+                        ModCostosVentas = Convert.ToDecimal(0.00),
+                        ModGastosAdmin = Convert.ToDecimal(0.00),
+                        ModGastosVentas = Convert.ToDecimal(0.00),
+                        ModGastosOperativos = Convert.ToDecimal(0.00),
+                        ModOtrosGastos = Convert.ToDecimal(0.00),
+                        ModUtilidad = Convert.ToDecimal(0.00),
+                        ModIR = Convert.ToDecimal(0.00),
+                        ModUtilidadNeta = Convert.ToDecimal(0.00),
+                         HistotialesER = new List<HistorialER>
+                       {
+                           historialER
+                       }
+                };
+                    _context.Add(modproyeccion);
+                    _context.SaveChanges();
+                }
+                else
+                { 
+                    var modelo= _context.ModeloProyeccion.Include(a=>a.HistotialesER).FirstOrDefault(a=>a.ModeloProyeccionId==1);
+                    var firstEr= modelo.HistotialesER.FirstOrDefault(a=>a.HistorialERId==1);
+                    modelo.ModVentasNetas = firstEr.VentasNetas;
+                    modelo.ModCostosVentas = firstEr.CostosVentas;
+                    modelo.ModGastosAdmin = firstEr.GastosAdmin;
+                    modelo.ModGastosVentas = firstEr.GastosVentas;
+                    modelo.ModGastosOperativos = firstEr.GastosOperativos;
+                    modelo.ModOtrosGastos = firstEr.OtrosGastos;
+                    modelo.ModUtilidad = firstEr.Utilidad;
+                    modelo.ModIR = firstEr.IR;
+                    modelo.ModUtilidadNeta = firstEr.UtilidadNeta;
+                   List<HistorialER> lister = modelo.HistotialesER.Where(a => a.HistorialERId != 1).ToList();
+                    foreach (var item in lister)
+                    {
+                        modelo.ModVentasNetas = item.VentasNetas/ modelo.ModVentasNetas;
+                        modelo.ModCostosVentas = item.CostosVentas/modelo.ModCostosVentas;
+                        modelo.ModGastosAdmin = item.GastosAdmin/modelo.ModGastosAdmin;
+                        modelo.ModGastosVentas = item.GastosVentas/modelo.ModGastosVentas;
+                        modelo.ModGastosOperativos = item.GastosOperativos / modelo.ModGastosOperativos;
+                        modelo.ModOtrosGastos = item.OtrosGastos/modelo.ModOtrosGastos;
+                        modelo.ModIR = item.IR / modelo.ModIR;
+                        modelo.ModUtilidadNeta = item.IR / modelo.ModIR;
+                    }
+                _context.Update(modelo);
+                modelo.HistotialesER.Add(historialER);
                 await _context.SaveChangesAsync();
+                }
                 return RedirectToAction(nameof(Index));
             }
             return View(historialER);
@@ -147,6 +201,11 @@ namespace GaidoSystem.Controllers
         private bool HistorialERExists(int id)
         {
             return _context.HistorialER.Any(e => e.HistorialERId == id);
+        }
+
+        public ActionResult toProyectar()
+        {
+            return RedirectToAction("Create", "Proyecciones");
         }
     }
 }

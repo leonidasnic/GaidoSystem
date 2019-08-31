@@ -1,5 +1,5 @@
-﻿@model GaidoSystem.Models.ModeloProyeccion
-
+﻿@*@model GaidoSystem.Models.ModeloProyeccion*@
+@model List<HistorialER>
 @{
     ViewData["Title"] = "Create";
 }
@@ -10,7 +10,18 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        
+        <table>
+            <tr>
+                @foreach (var item in Model)
+                {
+                    <td>@item.Fecha</td>
+                    <td>@item.VentasNetas</td>
+                }
+                <td></td>
+            </tr>
+        </table>
+        @*<form asp-action="Create">
             
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
@@ -51,8 +62,7 @@
                 <div class="form-group">
                     <input type="submit" value="Crear" class="btn btn-primary" />
                 </div>
-        </form>
-        ta
+        </form>*@
     </div>
 </div>
 
