@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GaidoSystem.Models;
 using System.Dynamic;
+using Microsoft.CSharp.RuntimeBinder;
 
 namespace GaidoSystem.Controllers
 {
@@ -48,58 +49,66 @@ namespace GaidoSystem.Controllers
         // GET: Proyecciones/Create
         public IActionResult Create()
         {
-        //    @*Ventas netas
-        //Costos de ventas
-        //Gastos Administrativos
-        //Gastos de venta
-        //Gastos de Operacion
-        //Otros Gastos
-        //Utilidad
-        //IR
-        //Utilidad Neta*@
+            //    @*Ventas netas
+            //Costos de ventas
+            //Gastos Administrativos
+            //Gastos de venta
+            //Gastos de Operacion
+            //Otros Gastos
+            //Utilidad
+            //IR
+            //Utilidad Neta*@
+            
             ModeloProyeccion modpro;
 
-            HistorialER hr = new HistorialER();
-            hr.Fecha = _context.HistorialER.LastOrDefault(a=>a.ModeloProyeccionId==1).Fecha;
-            hr.VentasNetas = _context.HistorialER.LastOrDefault(a => a.ModeloProyeccionId == 1).VentasNetas;
-            hr.CostosVentas = _context.HistorialER.LastOrDefault(a => a.ModeloProyeccionId == 1).CostosVentas;
-            hr.GastosAdmin = _context.HistorialER.LastOrDefault(a => a.ModeloProyeccionId == 1).GastosAdmin;
-            hr.GastosVentas = _context.HistorialER.LastOrDefault(a => a.ModeloProyeccionId == 1).GastosVentas;
-            hr.GastosOperativos = _context.HistorialER.LastOrDefault(a => a.ModeloProyeccionId == 1).GastosOperativos;
-            hr.OtrosGastos = _context.HistorialER.LastOrDefault(a => a.ModeloProyeccionId == 1).OtrosGastos;
-            hr.Utilidad = _context.HistorialER.LastOrDefault(a => a.ModeloProyeccionId == 1).Utilidad;
-            hr.IR = _context.HistorialER.LastOrDefault(a => a.ModeloProyeccionId == 1).IR;
-            hr.UtilidadNeta = _context.HistorialER.LastOrDefault(a => a.ModeloProyeccionId == 1).UtilidadNeta;
+            HistorialER hr;
+            
 
             if (_context.ModeloProyeccion.Count()<=1)
             {
+                hr = new HistorialER();
+                hr.Fecha = _context.HistorialER.LastOrDefault(a => a.ModeloProyeccionId == 1).Fecha;
+                hr.VentasNetas = _context.HistorialER.LastOrDefault(a => a.ModeloProyeccionId == 1).VentasNetas;
+                hr.CostosVentas = _context.HistorialER.LastOrDefault(a => a.ModeloProyeccionId == 1).CostosVentas;
+                hr.GastosAdmin = _context.HistorialER.LastOrDefault(a => a.ModeloProyeccionId == 1).GastosAdmin;
+                hr.GastosVentas = _context.HistorialER.LastOrDefault(a => a.ModeloProyeccionId == 1).GastosVentas;
+                hr.GastosOperativos = _context.HistorialER.LastOrDefault(a => a.ModeloProyeccionId == 1).GastosOperativos;
+                hr.OtrosGastos = _context.HistorialER.LastOrDefault(a => a.ModeloProyeccionId == 1).OtrosGastos;
+                hr.Utilidad = _context.HistorialER.LastOrDefault(a => a.ModeloProyeccionId == 1).Utilidad;
+                hr.IR = _context.HistorialER.LastOrDefault(a => a.ModeloProyeccionId == 1).IR;
+                hr.UtilidadNeta = _context.HistorialER.LastOrDefault(a => a.ModeloProyeccionId == 1).UtilidadNeta;
+
                 modpro = new ModeloProyeccion { ModVentasNetas=0.00m, ModCostosVentas = 0.00m, ModGastosAdmin = 0.00m,
                     ModGastosOperativos = 0.00m, ModGastosVentas = 0.00m, ModOtrosGastos = 0.00m,
                     ModUtilidad = 0.00m,ModIR=0.00m,ModUtilidadNeta=0.00m,HistotialesER = new List<HistorialER> { hr}
                 };
                 _context.ModeloProyeccion.Add(modpro);
                 _context.SaveChanges();
-                modpro = _context.ModeloProyeccion.Include(m => m.HistotialesER).LastOrDefault();
+                ViewBag.modelo = _context.ModeloProyeccion.Include(m => m.HistotialesER).FirstOrDefault(a=>a.ModeloProyeccionId==2);//
             }
             else
             {
-                var er = _context.HistorialER.FirstOrDefault(A => A.ModeloProyeccionId == 2);
-                er.Fecha = hr.Fecha;
-                er.VentasNetas = hr.VentasNetas;
-                er.CostosVentas = hr.CostosVentas;
-                er.GastosAdmin = hr.GastosAdmin;
-                er.GastosVentas = hr.GastosVentas;
-                er.GastosOperativos = hr.GastosOperativos;
-                er.OtrosGastos = hr.OtrosGastos;
-                er.Utilidad = hr.Utilidad;
-                er.IR = hr.IR;
-                er.UtilidadNeta = hr.UtilidadNeta;
-                _context.HistorialER.Update(er);
-                modpro = _context.ModeloProyeccion.Include(m=>m.HistotialesER).FirstOrDefault(a=>a.ModeloProyeccionId==2);
-                
+                hr = _context.HistorialER.FirstOrDefault(a => a.ModeloProyeccionId == 2);
+                hr.Fecha = _context.HistorialER.LastOrDefault(a => a.ModeloProyeccionId == 1).Fecha;
+                hr.VentasNetas = _context.HistorialER.LastOrDefault(a => a.ModeloProyeccionId == 1).VentasNetas;
+                hr.CostosVentas = _context.HistorialER.LastOrDefault(a => a.ModeloProyeccionId == 1).CostosVentas;
+                hr.GastosAdmin = _context.HistorialER.LastOrDefault(a => a.ModeloProyeccionId == 1).GastosAdmin;
+                hr.GastosVentas = _context.HistorialER.LastOrDefault(a => a.ModeloProyeccionId == 1).GastosVentas;
+                hr.GastosOperativos = _context.HistorialER.LastOrDefault(a => a.ModeloProyeccionId == 1).GastosOperativos;
+                hr.OtrosGastos = _context.HistorialER.LastOrDefault(a => a.ModeloProyeccionId == 1).OtrosGastos;
+                hr.Utilidad = _context.HistorialER.LastOrDefault(a => a.ModeloProyeccionId == 1).Utilidad;
+                hr.IR = _context.HistorialER.LastOrDefault(a => a.ModeloProyeccionId == 1).IR;
+                hr.UtilidadNeta = _context.HistorialER.LastOrDefault(a => a.ModeloProyeccionId == 1).UtilidadNeta;
+                _context.HistorialER.Update(hr);
+                _context.SaveChanges();
             }
-           
-            return View(modpro);
+            ViewBag.modelo = _context.ModeloProyeccion.Include(m => m.HistotialesER).FirstOrDefault(a => a.ModeloProyeccionId == 2);
+            ViewBag.ultimaproyeccion = _context.Proyecciones.LastOrDefault();
+            ViewBag.lastER = _context.HistorialER.LastOrDefault(a => a.ModeloProyeccionId == 1);
+            ViewBag.cantidad = _context.Proyecciones.ToList();
+
+            return View();
+
         }
 
         // POST: Proyecciones/Create
@@ -107,15 +116,19 @@ namespace GaidoSystem.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(ModeloProyeccion ModPRo)
+        public async Task<IActionResult> Create([Bind("Fecha,ProVentasNetas,ProCostosVentas,ProGastosAdmin,ProGastosVentas,ProGastosOperativos,ProOtrosGastos,proUtilidad,proIR,proUtilidadNeta")] Proyecciones proyecciones)
         {
-            if (ModelState.IsValid)
-            {
-                _context.ModeloProyeccion.Update(ModPRo);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View();
+            
+                var model = _context.ModeloProyeccion.Include(m => m.ListaProyecciones).FirstOrDefault(m => m.ModeloProyeccionId == 2);
+                model.ListaProyecciones.Add(proyecciones);
+                _context.ModeloProyeccion.Update(model);
+                _context.SaveChanges();
+                return RedirectToAction();
+                
+                
+            
+
+
         }
 
         // GET: Proyecciones/Edit/5

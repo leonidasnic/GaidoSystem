@@ -9,7 +9,10 @@
             document.getElementById("alerta").classList.add('bg-danger');
             document.getElementById("alerta").classList.add('text-white');
             document.getElementById("alerta").innerHTML = "Necesita al menos 2 ERs Para Proyectar"
-            document.getElementById("btnAlerta").className="d-block";
+            document.getElementById("btnAlerta").className = "d-block";
+        }
+        else {
+            window.location.href="/AnualidadERs/Create"
         }
     }
 </script>

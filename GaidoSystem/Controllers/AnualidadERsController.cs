@@ -21,7 +21,7 @@ namespace GaidoSystem.Controllers
         // GET: AnualidadERs
         public async Task<IActionResult> Index()
         {
-            return View(await _context.AnualidadER.ToListAsync());
+            return View();
         }
 
         // GET: AnualidadERs/Details/5
@@ -45,6 +45,11 @@ namespace GaidoSystem.Controllers
         // GET: AnualidadERs/Create
         public IActionResult Create()
         {
+            ViewBag.ModeloAuto = _context.ModeloProyeccion.FirstOrDefault(a => a.ModeloProyeccionId == 1);
+            ViewBag.lastER = _context.HistorialER.LastOrDefault(a => a.ModeloProyeccionId == 1);
+            ViewBag.lastPro = _context.Proyecciones.LastOrDefault(a => a.ModeloProyeccionId == 1);
+            ViewBag.procount = _context.Proyecciones.Where(a => a.ModeloProyeccionId == 1).ToList();
+            
             return View();
         }
 
@@ -53,15 +58,13 @@ namespace GaidoSystem.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("AnualidadERId,Year,Notas")] AnualidadER anualidadER)
+        public async Task<IActionResult> Create([Bind("Fecha,ProVentasNetas,ProCostosVentas,ProGastosAdmin,ProGastosVentas,ProGastosOperativos,ProOtrosGastos,proUtilidad,proIR,proUtilidadNeta")] Proyecciones proyecciones )
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(anualidadER);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(anualidadER);
+            var model = _context.ModeloProyeccion.Include(m => m.ListaProyecciones).FirstOrDefault(m => m.ModeloProyeccionId == 1);
+            model.ListaProyecciones.Add(proyecciones);
+            _context.ModeloProyeccion.Update(model);
+            _context.SaveChanges();
+            return RedirectToAction();
         }
 
         // GET: AnualidadERs/Edit/5

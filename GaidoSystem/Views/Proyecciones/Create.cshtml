@@ -1,214 +1,342 @@
-﻿@model GaidoSystem.Models.ModeloProyeccion
-
+﻿@model GaidoSystem.Models.Proyecciones
 @{
     ViewData["Title"] = "Create";
 }
 @{
-    var ER = Model.HistotialesER.LastOrDefault();
-    int Tipo;
-
-    Tipo = Model.ModeloProyeccionId;
-
-    
+    ModeloProyeccion data = ViewBag.modelo;
+    HistorialER  ER= ViewBag.lastER;
+    Proyecciones pro = ViewBag.ultimaproyeccion;
+    List<Proyecciones> cantidad = ViewBag.cantidad;
 }
 <h1></h1>
 
+<script>
+    function cal(int, por, concepto) {
+        var num = 0.00;
+        num =parseInt(document.getElementById(int).innerHTML);
+        var porcentaje=0.00
+        porcentaje = parseInt(document.getElementById(por).innerHTML);
+        var total = 0.00;
+        total = num * ((porcentaje / 100) + 1);
+        document.getElementById(concepto).value=total;
+    };
+
+    function add() {
+        cal('intVN', 'proVN', 'VentasNetas');
+        
+        cal('intCV', 'proCV', 'CostosVentas');
+
+        cal('intGA', 'proGA', 'GastosAdmin');
+
+        cal('intGV', 'proGV', 'GastosVentas');
+        
+        cal('intGO', 'proGO', 'GastosOperativos');
+
+        cal('intOG', 'proOG', 'otrosGastos');
+
+        cal('intU', 'proU', 'Utilidad');
+
+        cal('intIR', 'proIR', 'IR');
+
+        cal('intUN', 'proUN', 'UtilidadNeta');
+    };
+
+    function  usar(){
+        document.getElementById('intFecha').innerHTML = document.getElementById('proFecha').innerHTML;
+        document.getElementById('intVN').innerHTML = document.getElementById('ProCostosVentas').innerHTML;
+        document.getElementById('intCV').innerHTML = document.getElementById('ProCostosVentas').innerHTML;
+        document.getElementById('intGA').innerHTML = document.getElementById('ProGastosAdmin').innerHTML;
+        document.getElementById('intGV').innerHTML = document.getElementById('ProGastosVentas').innerHTML;
+        document.getElementById('intGO').innerHTML = document.getElementById('ProGastosOperativos').innerHTML;
+        document.getElementById('intU').innerHTML = document.getElementById('proUtilidad').innerHTML;
+        document.getElementById('intIR').innerHTML = document.getElementById('proIR').innerHTML;
+        document.getElementById('intUN').innerHTML = document.getElementById('proUtilidadNeta').innerHTML;
+    }
+</script>
 
 
 <div class="row">
     <div class="col-3">
         <table class="table table-dark table-striped">
             <tr>
-                <th scope="col" colspan="3" class="bg-warning"> 
-                    Proyectar
+                <th scope="col" colspan="2" class="bg-warning">
+                    Proyeccion
                 </th>
-                <td rowspan="20"  class="bg-light mh-100"><button class="btn btn-warning" style="padding-top:1500%;padding-bottom:1500%;">&gt;</button></td>
+                <td rowspan="20" class="bg-danger mh-100"><button class="btn btn-warning" style="padding-top:1500%;padding-bottom:1500%;" onclick="add()">&gt;</button></td>
             </tr>
             <tr>
-                <td>@ER.Fecha.Year</td>
-                <td class="bg-danger">@ER.Fecha.AddYears(1).Year</td>
-                <td class="bg-danger">@ER.Fecha.AddYears(2).Year</td>
+                <td colspan="2" id="intFecha">@ER.Fecha.Year</td>
             </tr>
             <tr>
-                <td colspan="3" class="text-center">Ventas Netas @Tipo </td>
+                <td colspan="2" class="text-center">Ventas Netas </td>
             </tr>
             <tr>
-                <td>@ER.VentasNetas</td>
-                <td class="bg-danger" contenteditable="true">@Html.DisplayFor(a => a.ModVentasNetas)<label> %</label></td>
-                <td class="bg-danger" contenteditable="true">@Html.DisplayFor(a => a.ModVentasNetas)<label> %</label></td>
+                <td id="intVN">@ER.VentasNetas</td>
+                <td class="bg-danger" contenteditable="true" id="proVN">0<label> %</label></td>
             </tr>
             <tr>
-                <td colspan="3" class="text-center">Costo de Ventas</td>
+                <td colspan="2" class="text-center">Costo de Ventas</td>
             </tr>
             <tr>
-                <td>@ER.CostosVentas</td>
-                <td class="bg-danger" contenteditable="true">@Html.DisplayFor(a => a.ModCostosVentas)<label> %</label></td>
-                <td class="bg-danger" contenteditable="true">@Html.DisplayFor(a => a.ModCostosVentas)<label> %</label></td>
+                <td id="intCV">@ER.CostosVentas</td>
+                <td class="bg-danger" contenteditable="true" id="proCV">0<label> %</label></td>
             </tr>
             <tr>
-                <td colspan="3" class="text-center">Gastos Administrativos</td>
+                <td colspan="2" class="text-center">Gastos Administrativos</td>
             </tr>
             <tr>
-                <td>@ER.GastosAdmin</td>
-                <td class="bg-danger" contenteditable="true">@Html.DisplayFor(a => a.ModGastosAdmin)<label> %</label></td>
-                <td class="bg-danger" contenteditable="true">@Html.DisplayFor(a => a.ModGastosAdmin)<label> %</label></td>
+                <td id="intGA">@ER.GastosAdmin</td>
+                <td class="bg-danger" contenteditable="true" id="proGA">0<label> %</label></td>
             </tr>
             <tr>
-                <td colspan="3" class="text-center">Gastos Ventas</td>
+                <td colspan="2" class="text-center">Gastos Ventas</td>
             </tr>
             <tr>
-                <td>@ER.GastosVentas</td>
-                <td class="bg-danger" contenteditable="true">@Html.DisplayFor(a => a.ModGastosVentas)<label> %</label></td>
-                <td class="bg-danger" contenteditable="true">@Html.DisplayFor(a => a.ModGastosAdmin)<label> %</label></td>
+                <td id="intGV">@ER.GastosVentas</td>
+                <td class="bg-danger" contenteditable="true" id="proGV">0<label> %</label></td>
             </tr>
             <tr>
-                <td colspan="3">Gastos Operacion</td>
+                <td colspan="2">Gastos Operacion</td>
             </tr>
             <tr>
-                <td>@ER.GastosOperativos</td>
-                <td class="bg-danger" contenteditable="true">@Html.DisplayFor(a => a.ModGastosOperativos)<label> %</label></td>
-                <td class="bg-danger" contenteditable="true">@Html.DisplayFor(a => a.ModGastosAdmin)<label> %</label></td>
+                <td id="intGO">@ER.GastosOperativos</td>
+                <td class="bg-danger" contenteditable="true" id="proGO">0<label> %</label></td>
             </tr>
             <tr>
-                <td colspan="3" class="text-center">Otros Gastos</td>
+                <td colspan="2" class="text-center">Otros Gastos</td>
             </tr>
             <tr>
-                <td>@ER.OtrosGastos</td>
-                <td class="bg-danger" contenteditable="true">@Html.DisplayFor(a => a.ModOtrosGastos)<label> %</label></td>
-                <td class="bg-danger" contenteditable="true">@Html.DisplayFor(a => a.ModGastosAdmin)<label> %</label></td>
+                <td id="intOG">@ER.OtrosGastos</td>
+                <td id="proOG" class="bg-danger" contenteditable="true">0<label> %</label></td>
             </tr>
             <tr>
-                <td colspan="3" class="text-center">Utilidad</td>
+                <td colspan="2" class="text-center">Utilidad</td>
             </tr>
             <tr>
-                <td>@ER.Utilidad</td>
-                <td class="bg-danger" contenteditable="true">@Html.DisplayFor(a => a.ModUtilidad)<label> %</label></td>
-                <td class="bg-danger" contenteditable="true">@Html.DisplayFor(a => a.ModGastosAdmin)<label> %</label></td>
+                <td id="intU">@ER.Utilidad</td>
+                <td id="proU" class="bg-danger" contenteditable="true">0<label> %</label></td>
             </tr>
             <tr>
-                <td colspan="3" class="text-center">IR</td>
+                <td colspan="2" class="text-center">IR</td>
             </tr>
             <tr>
-                <td>@ER.IR</td>
-                <td class="bg-danger" contenteditable="true">@Html.DisplayFor(a => a.ModIR)<label> %</label></td>
-                <td class="bg-danger" contenteditable="true">@Html.DisplayFor(a => a.ModGastosAdmin)<label> %</label></td>
+                <td id="intIR">@ER.IR</td>
+                <td id="proIR" class="bg-danger" contenteditable="true">0<label> %</label></td>
             </tr>
             <tr>
-                <td colspan="3" class="text-center">Utilidad Neta</td>
+                <td colspan="2" class="text-center">Utilidad Neta</td>
             </tr>
             <tr>
-                <td>@ER.UtilidadNeta</td>
-                <td class="bg-danger" contenteditable="true">@Html.DisplayFor(a => a.ModUtilidadNeta)<label> %</label></td>
-                <td class="bg-danger" contenteditable="true">@Html.DisplayFor(a => a.ModGastosAdmin)<label> %</label></td>
+                <td id="intUN">@ER.UtilidadNeta</td>
+                <td id="proUN" class="bg-danger" contenteditable="true">0<label> %</label></td>
             </tr>
 
         </table>
     </div>
-    <div class="col">
-        
-        <table class="table table-active">
-            <tr>
-                <th scope="col">Descripcion</th>
-                <th>@ER.Fecha.Year</th>
-                <th>@ER.Fecha.AddYears(1).Year</th>
-                <th>@ER.Fecha.AddYears(2).Year</th>
-            </tr>
-            <tr>
-                <td>Ventas Netas</td>
-                <td>@ER.VentasNetas</td>
-                <td id="VentasNetas1"></td>
-                <td id="VentasNetas2"></td>
-            </tr>
-            <tr>
-                <td>Costo de Ventas</td>
-                <td>@ER.CostosVentas</td>
-                <td id="CostosVentas1"></td>
-                <td id="CostosVentas2"></td>
-            </tr>
-            <tr>
-                <td>Gastos Administrativos</td>
-                <td>@ER.GastosAdmin</td>
-                <td id="GastosAdmin"></td>
-                <td id="GastosAdmin2"></td>
-            </tr>
-            <tr>
-                <td>Gastos de Ventas</td>
-                <td>@ER.GastosVentas</td>
-                <td id="GastosVentas"></td>
-                <td id="GastosVentas"></td>
-            </tr>
-            <tr>
-                <td>Gastos de Ventas</td>
-                <td>@ER.GastosOperativos</td>
-                <td id="GastosOperativos"></td>
-                <td id="GastosOperativos2"></td>
-            </tr>
-            <tr>
-                <td>Utilidad</td>
-                <td>@ER.Utilidad</td>
-                <td id="Utilidad"></td>
-                <td id="Utilidad2"></td>
-            </tr>
-            <tr>
-                <td>IR</td>
-                <td>@ER.IR</td>
-                <td id="IR"></td>
-                <td id="IR2"></td>
-            </tr>
-            <tr>
-                <td>Utilidad Neta</td>
-                <td>@ER.UtilidadNeta</td>
-                <td id="UtilidadNeta"></td>
-                <td id="UtilidadNeta2"></td>
-            </tr>
+
+    <div class="col-3">
+        <div class="form-group">
+            <label class="control-label">Fecha</label>
+            <input type="datetime" value=@ER.Fecha.Year class="form-control"  readonly="readonly"/>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Ventas Netas</label>
+            <input class="form-control" value=@ER.VentasNetas readonly="readonly"/>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Costos de Ventas</label>
+            <input  class="form-control" value=@ER.CostosVentas readonly="readonly"/>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Gastos Admin</label>
+            <input  class="form-control" value=@ER.GastosAdmin readonly="readonly"/>
+        </div>
+        <div class="form-group">
+            <label  class="control-label">Gastos de ventas</label>
+            <input class="form-control"  value=@ER.GastosVentas readonly="readonly"/>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Gastos de Operacion</label>
+            <input class="form-control" value=@ER.GastosOperativos readonly="readonly"/>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Otros Gastos</label>
+            <input class="form-control" value=@ER.OtrosGastos readonly="readonly"/>
+        </div>
+        <div class="form-group">
+            <label class="control-label">UTilidad</label>
+            <input class="form-control" value=@ER.Utilidad readonly="readonly"/>
+        </div>
+        <div class="form-group">
+            <label class="control-label">IR</label>
+            <input class="form-control" value=@ER.IR readonly="readonly"/>
+        </div>
+        <div class="form-group">
+            <label class="control-label"> Utilidad Neta</label>
+            <input  class="form-control" value=@ER.UtilidadNeta readonly="readonly"/>
+        </div>
+        <hr />
+        <br />
+        <!--<table class="table table-active">
+        <tr>
+            <th scope="col">Descripcion</th>
+            <th>@ER.Fecha.Year</th>
+            @*<th><input type="datetime" value="@ER.Fecha.AddYears(1).Year" asp-for="Fecha" /></th>*@
+        </tr>
+        <tr>
+            <td>Ventas Netas</td>
+            <td>@ER.VentasNetas</td>
+            @*<td><input id="VentasNetas" class="table-active" readonly="readonly" asp-for="ProVentasNetas" /></td>*@
+        </tr>
+        <tr>
+            <td>Costo de Ventas</td>
+            <td>@ER.CostosVentas</td>
+            @*<td><input id="CostosVentas" class="table-active" readonly="readonly" asp-for="ProCostosVentas" /></td>*@
+        </tr>
+        <tr>
+            <td>Gastos Administrativos</td>
+            <td>@ER.GastosAdmin</td>
+            @*<td><input id="GastosAdmin" class="table-active" readonly="readonly" asp-for="ProGastosAdmin" /></td>*@
+        </tr>
+        <tr>
+            <td>Gastos de Ventas</td>
+            <td>@ER.GastosVentas</td>
+            @*<td><input id="GastosVentas" class="table-active" readonly="readonly" asp-for="ProGastosVentas" /></td>*@
+        </tr>
+        <tr>
+            <td>Gastos de Ventas</td>
+            <td>@ER.GastosOperativos</td>
+            @*<td><input id="GastosOperativos" class="table-active" readonly="readonly" asp-for="ProGastosOperativos" /></td>*@
+        </tr>
+        <tr>
+            <td>Otros Gastos</td>
+            <td>@ER.OtrosGastos</td>
+            @*<td><input id="otrosGastos" class="table-active" readonly="readonly" asp-for="ProOtrosGastos" /></td>*@
+        </tr>
+        <tr>
+            <td>Utilidad</td>
+            <td>@ER.Utilidad</td>
+            @*<td><input id="Utilidad" class="table-active" readonly="readonly" asp-for="proUtilidad" /></td>*@
+        </tr>
+        <tr>
+            <td>IR</td>
+            <td>@ER.IR</td>
+            @*<td><input id="IR" class="table-active" readonly="readonly" asp-for="proIR" /></td>*@
+        </tr>
+        <tr>
+            <td>Utilidad Neta</td>
+            <td>@ER.UtilidadNeta</td>
+            @*<td><input id="UtilidadNeta" class="table-active" readonly="readonly" asp-for="proUtilidad" /></td>*@
+        </tr>
+        <tr>
+            <td colspan="3"></td>
+        </tr>
+    </table>-->
+        <table class="table table-warning">
+            <thead>
+                <tr>
+                    <th colspan="9" class="text-center">Ultima Proyeccion</th>
+                </tr>
+                <tr>
+                    <td>Fecha</td>
+                    <th>Ventas Netas</th>
+                    <th>Costo de Ventas</th>
+                    <th>Gastos Administrativos</th>
+                    <th>Gastos de Ventas</th>
+                    <th>Gastos Operacion</th>
+                    <th>OTros Gastos</th>
+                    <th>Utilidad</th>
+                    <th>IR</th>
+                    <th>Utilidad Neta</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (cantidad.Count()>0)
+                {
+                    <tr>
+                        <td id="proFecha">@pro.Fecha</td>
+                        <td id="ProVentasNetas">@pro.ProVentasNetas</td>
+                        <td id="ProCostosVentas">@pro.ProCostosVentas</td>
+                        <td id="ProGastosAdmin">@pro.ProGastosAdmin</td>
+                        <td id="ProGastosVentas">@pro.ProGastosVentas</td>
+                        <td id="ProGastosOperativos">@pro.ProGastosOperativos</td>
+                        <td id="ProOtrosGastos">@pro.ProOtrosGastos</td>
+                        <td id="proUtilidad">@pro.proUtilidad</td>
+                        <td id="proIR">@pro.proIR</td>
+                        <td id="proUtilidadNeta">@pro.proUtilidadNeta</td>
+                        <td><button class="btn btn-primary" onclick="usar()">Usar</button></td>
+                    </tr>
+                }
+            </tbody>
         </table>
-        <!-- <form asp-action="Create">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        @*<div class="form-group">
-            <label asp-for="Fecha" class="control-label"></label>
-            <input asp-for="Fecha" class="form-control" />
-            <span asp-validation-for="Fecha" class="text-danger"></span>
-        </div>*@
-        <div class="form-group">
-            <label asp-for="ProVentasNetas" class="control-label"></label>
-            <input asp-for="ProVentasNetas" class="form-control" />
-            <span asp-validation-for="ProVentasNetas" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="ProCostosVentas" class="control-label"></label>
-            <input asp-for="ProCostosVentas" class="form-control" />
-            <span asp-validation-for="ProCostosVentas" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="ProGastosAdmin" class="control-label"></label>
-            <input asp-for="ProGastosAdmin" class="form-control" />
-            <span asp-validation-for="ProGastosAdmin" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="ProGastosVentas" class="control-label"></label>
-            <input asp-for="ProGastosVentas" class="form-control" />
-            <span asp-validation-for="ProGastosVentas" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="ProGastosOperativos" class="control-label"></label>
-            <input asp-for="ProGastosOperativos" class="form-control" />
-            <span asp-validation-for="ProGastosOperativos" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="ProOtrosGastos" class="control-label"></label>
-            <input asp-for="ProOtrosGastos" class="form-control" />
-            <span asp-validation-for="ProOtrosGastos" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="ModeloProyeccionId" class="control-label"></label>
-            <select asp-for="ModeloProyeccionId" class="form-control" asp-items="ViewBag.ModeloProyeccionId"></select>
-        </div>
-        <div class="form-group">
-            <input type="submit" value="Crear" class="btn btn-primary" />
-        </div>
-    </form>-->
     </div>
 
+    <div class="col-3">
+        <form asp-action="Create" class="table table-warning" >
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Fecha" class="control-label"></label>
+                <input asp-for="Fecha" type="month"  class="form-control" />
+                <span asp-validation-for="Fecha" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProVentasNetas" class="control-label"></label>
+                <input asp-for="ProVentasNetas" class="form-control" id="VentasNetas" />
+                <span asp-validation-for="ProVentasNetas" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProCostosVentas" class="control-label"></label>
+                <input asp-for="ProCostosVentas" class="form-control" id="CostosVentas" />
+                <span asp-validation-for="ProCostosVentas" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProGastosAdmin" class="control-label"></label>
+                <input asp-for="ProGastosAdmin" class="form-control" id="GastosAdmin" />
+                <span asp-validation-for="ProGastosAdmin" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProGastosVentas" class="control-label"></label>
+                <input asp-for="ProGastosVentas" class="form-control" id="GastosVentas" />
+                <span asp-validation-for="ProGastosVentas" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProGastosOperativos" class="control-label"></label>
+                <input asp-for="ProGastosOperativos" class="form-control" id="GastosOperativos" />
+                <span asp-validation-for="ProGastosOperativos" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProOtrosGastos" class="control-label"></label>
+                <input asp-for="ProOtrosGastos" class="form-control" id="otrosGastos" />
+                <span asp-validation-for="ProOtrosGastos" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="proUtilidad" class="control-label"></label>
+                <input asp-for="proUtilidad" class="form-control" id="Utilidad" />
+                <span asp-validation-for="proUtilidad" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="proIR" class="control-label"></label>
+                <input asp-for="proIR" class="form-control" id="IR" />
+                <span asp-validation-for="proIR" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="proUtilidadNeta" class="control-label"></label>
+                <input asp-for="proUtilidadNeta" class="form-control" id="UtilidadNeta" />
+                <span asp-validation-for="proUtilidadNeta" class="text-danger"></span>
+            </div>
+            <div class="form-group d-none">
+                <label asp-for="ModeloProyeccionId" class="control-label"></label>
+                <select asp-for="ModeloProyeccionId" class="form-control">
+                    <option selected>2</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Guardar" class="btn btn-primary w-100" />
+            </div>
+        </form>
+    </div>
+    
 
 </div>
 
